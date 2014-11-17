@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mgine conception</title>
+
+</head>
+<body>
+
+
+	<div id="diagram"></div>
+
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/raphael-min.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/sequence-diagram-min.js"></script>
+
+	<div class="diagram">
+		Home->>E1: Random
+		Home->>E2: Random
+		Home->>E3: Random
+		
+		E1->Home: Response ok
+		Note left of E1: Set localstorage E1 ok
+		
+		E2->Home: Response ok 
+		Note left of E2: Set localstorage E2 ok
+
+		Note over Response: Enter the correct answer
+
+		E3->Home: Response ok 
+		Note left of E3: Set localstorage E3 ok
+
+		Home->Response: Direct
+
+
+	</div>
+	<script>
+		$(".diagram").sequenceDiagram({theme: 'hand'});
+	</script>
+
+</body>
+</html>
