@@ -11,9 +11,9 @@ var $ = require('gulp-load-plugins')({
 
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.scss')
-        .pipe($.rubySass({
-            style: 'expanded',
-            precision: 10
+        .pipe($.compass({
+            sass: 'app/styles',
+            css: 'app/styles'
         }))
         .pipe($.autoprefixer('last 1 version'))
         .pipe(gulp.dest('.tmp/styles'))
