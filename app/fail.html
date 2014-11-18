@@ -72,9 +72,13 @@
 
         <script type="text/javascript">
         $(function() {
-          setTimeout(function() {
-            $('#myModal').modal();
-          }, 2000);
+            var $modal = $('#myModal');
+            $modal.on('hidden.bs.modal', function (e) {
+              window.location.href = '/';
+            });
+            setTimeout(function() {
+              $modal.modal();
+            }, 3000);
         });
         </script>
       </body>

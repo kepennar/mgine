@@ -186,11 +186,15 @@ html {
   }
 }
 
-.black-modal{
+.black-modal {
     background-color: #555;
     .modal-header {
         background-color:#111;
         color: #EEE;
+
+        h4 {
+            font-size: 35px;
+        }
     }
     .modal-body {
         font-size: 38px;

@@ -5,7 +5,7 @@
     "bootstrap-sass-official": "~3.3.1",
     "modernizr": "~2.6.2",
     "jquery": "~1.11.0",
-    "okvideo": "2.3.3"
-  },
-  "devDependencies": {}
+    "okvideo": "2.3.3",
+    "cryptojslib": "~3.1.2"
+  }
 }

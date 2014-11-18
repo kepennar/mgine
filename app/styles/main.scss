@@ -93,25 +93,14 @@ body {
     }
 }
 
+.title {
+    opacity: 0.8;
 
-
-
-
-/* Results */
-
-.result-container {
-  text-align: center;  
-  margin-right: auto;
-  margin-left: auto;
-}
-
-@media (min-width: 768px) {
-    .result-container {
-         width: 100%;
+    h1 {
+        font-weight: bold;
     }
 }
-@media (min-width: 992px) {
-    .result-container {
-        width: 700px;
-    }
+
+.enigms li {
+    margin: 20px auto;
 }
