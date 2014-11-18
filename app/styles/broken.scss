@@ -1,0 +1,46 @@
+
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+@import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.cubes div {
+    text-align: center;
+    min-height: 50px;
+    
+    border-radius: 5px;
+    &.row-even div {
+        border: solid 1px #333;
+
+        &:nth-child(odd) {
+            background-color: #AA4444;
+        }
+        &:nth-child(even) {
+            background-color: #44AA44;
+        }    
+    }
+    &.row-odd  div {
+        border: solid 1px #333;
+
+        &:nth-child(odd) {
+            background-color: #44AA44;
+        }
+        &:nth-child(even) {
+            background-color: #AA4444;
+        }       
+    }
+    .maumauche {
+        font-size: 10px;
+        width: 40px;
+        min-height: 20px;
+        line-height: 20px;
+        background-color: #DD54CB !important;
+        margin: auto;
+        padding: 0;
+    }
+    
+}
