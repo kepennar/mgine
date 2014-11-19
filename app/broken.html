@@ -10,7 +10,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div id="navbar" class="navbar-collapse collapse">
 			<form class="navbar-form navbar-right" role="form">
-				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#solutionModal">Got it</button>
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#solutionModal">I know!</button>
 			</form>
 		</div><!--/.navbar-collapse -->
 	</div>
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<input  type="submit" value="Got it" id="submit-result" class="btn btn-success" ></input >
+				<input  type="submit" value="Got it" id="submit-result" class="btn btn-success" />
 			</div>
 			</form>
 		</div>
@@ -74,7 +74,7 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-1"></div>
 		<div class="col-md-1"></div>
-		<div class="col-md-1 maumauche">2</div>
+		<div class="col-md-1 maumauche">vidange</div>
 		<div class="col-md-1"></div>
 		<div class="col-md-1"></div>
 		<div class="col-md-1">Non, pas ça</div>
@@ -134,7 +134,7 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-1">Non, pas ça</div>
 		<div class="col-md-1"></div>
-		<div class="col-md-1 maumauche">jours</div>
+		<div class="col-md-1 maumauche">pizza</div>
 		<div class="col-md-1"></div>
 		<div class="col-md-1"></div>
 	</div>
@@ -179,54 +179,53 @@
         <script src="bower_components/cryptojslib/components/sha1-min.js"></script>
         <!-- endbuild -->
 
-<script type="text/javascript">
-	$(function() {
+        <script type="text/javascript">
+        	$(function() {
 
-		$('body').jGravity({
-			target: '.cubes div',
-			weight: 8,
-			depth: 1,
-			drag: true
-		});
-		var $solution= $('#solution');
-		$('#solutionModal').on('shown.bs.modal', function() {
-			$solution.focus();
-		});
+        		$('body').jGravity({
+        			target: '.cubes div',
+        			weight: 8,
+        			depth: 1,
+        			drag: true
+        		});
+        		var $solution= $('#solution');
+        		$('#solutionModal').on('shown.bs.modal', function() {
+        			$solution.focus();
+        		});
 
-		$('#solution-form').submit(function(e) {
-			e.preventDefault();
-			
-			var solution= $solution.val();
-			var hash = CryptoJS.SHA1(solution).toString();
-			if (hash === '505eabdfb8082f91ed4a2fbaff9ecb5408d27baa'
-				|| hash === 'ae1eacbd142f36d4ff9b80336bff56b079416595'){
-				localStorage.setItem('enigm1', true);
-				window.location.href = 'index.html';
-			} else {
-				var rand= Math.floor((Math.random() * 4) + 1);
-				if (rand === 3) {
-					window.location.href = 'fail.html';	
-				} else {
-					wrongAnswerStyle();
-				}
+        		$('#solution-form').submit(function(e) {
+        			e.preventDefault();
 
-			}
-			return false;
-		});
+        			var solution= $solution.val();
+        			var hash = CryptoJS.SHA1(solution).toString();
+        			if (hash === '174aa7a1814ea2cbf06c08c3f9d107e21dc8c74c'
+        				|| hash === '0754f90c66dd93e3754a5c002351d04de1365e4d'){
+        				localStorage.setItem('enigm3', true);
+        			window.location.href = 'index.html';
+        		} else {
+        			wrongAnswerStyle();
+        		}
+        		return false;
+        	});
 
-		var wrongAnswerStyle= function() {
-			var rand= Math.floor((Math.random() * 4) + 1);
-			if (rand === 3) {
-				window.location.href = 'fail.html';	
-			} else {
-				$solution.addClass('animated hinge');
-				setTimeout(function() {
-	              $solution.removeClass('animated hinge');
-	            }, 2800);
-			}
-		};
-	});
-</script>
+        		var wrongAnswerStyle= function() {
+        			var anims= ['hinge', 'tada', 'bounce'];
+        			var rand= Math.floor((Math.random() * 5));
+        			if (rand === 3) {
+        				window.location.href = 'fail.html?back=broken.html';	
+        			} else {
+        				var animIndice= Math.floor((Math.random() * anims.length));
+        				var anim= anims[animIndice];
+        				$solution.parent().addClass('has-error');
+        				$solution.addClass('animated ' + anim);
+        				setTimeout(function() {
+        					$solution.removeClass('animated ' + anim);
+        					$solution.parent().removeClass('has-error');
+        				}, 2000);
+        			}
+        		};
+        	});
+		</script>
 
 </body>
 </html>

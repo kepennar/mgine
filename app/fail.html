@@ -60,7 +60,6 @@
         <script src="bower_components/bootstrap-sass-official/assets//javascripts/bootstrap/modal.js"></script>
         <script src="bower_components/bootstrap-sass-official/assets//javascripts/bootstrap/transition.js"></script>
         <script src="bower_components/bootstrap-sass-official/assets//javascripts/bootstrap/button.js"></script>
-        <script src="bower_components/bootstrap-sass-official/assets//javascripts/bootstrap/popover.js"></script>
         <script src="bower_components/bootstrap-sass-official/assets//javascripts/bootstrap/collapse.js"></script>
         <!-- endbuild -->
 
@@ -68,7 +67,8 @@
         $(function() {
             var $modal = $('#myModal');
             $modal.on('hidden.bs.modal', function (e) {
-              window.location.href = '/';
+              var backPath= location.search.slice(window.location.search.indexOf('=') +1);
+              window.location.href = backPath ? backPath : 'index.html';
             });
             setTimeout(function() {
               $modal.modal();
