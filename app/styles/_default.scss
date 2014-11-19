@@ -1,0 +1,16 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+@import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+
+@import "compass/css3/animation";
+
+@import "mixins/animate";
+
+
+.solution-modal {
+	.modal-header {
+		background-color: #428bca; 
+	}
+	.modal-footer {
+		background-color: #eee;
+	}
+}

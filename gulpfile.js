@@ -5,7 +5,7 @@ var gulp = require('gulp');
 
 // load plugins
 var $ = require('gulp-load-plugins')({
-    pattern: ['gulp-*', 'gulp.*', 'main-bower-files'],
+    pattern: ['gulp-*', 'gulp.*', 'main-bower-files', 'lazypipe'],
     replaceString: /\bgulp[\-.]/
 });
 
@@ -21,28 +21,27 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts', function () {
-    return gulp.src('app/scripts/**/*.js')
+    return gulp.src(['app/scripts/**/*.js', '!app/scripts/libs/*'])
         .pipe($.jshint())
         .pipe($.jshint.reporter(require('jshint-stylish')))
         .pipe($.size());
 });
 
 gulp.task('html', ['styles', 'scripts'], function () {
-    var jsFilter = $.filter('**/*.js');
-    var cssFilter = $.filter('**/*.css');
+    var lazypipe = require('lazypipe');
+    var cssChannel = lazypipe()
+        .pipe($.csso)
+        .pipe($.replace, '../bower_components/bootstrap-sass-official/assets/fonts/bootstrap', '../fonts');
+    var assets = $.useref.assets({searchPath: '{.tmp,app}'});
 
-    return gulp.src('app/*.html')
-        .pipe($.useref.assets({searchPath: '{.tmp,app}'}))
-        .pipe(jsFilter)
-        .pipe($.uglify())
-        .pipe(jsFilter.restore())
-        .pipe(cssFilter)
-        .pipe($.csso())
-        .pipe(cssFilter.restore())
-        .pipe($.useref.restore())
-        .pipe($.useref())
-        .pipe(gulp.dest('dist'))
-        .pipe($.size());
+  return gulp.src('app/*.html')
+    .pipe(assets)
+    .pipe($.if('*.js', $.uglify()))
+    .pipe($.if('*.css', cssChannel()))
+    .pipe(assets.restore())
+    .pipe($.useref())
+    .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('images', function () {

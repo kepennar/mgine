@@ -9550,24 +9550,11 @@ Copyright (c) 2014 Daniel Eden
   animation-name: slideOutUp;
 }
 
-/*-----------------------------------*\
-  $RESET
-\*-----------------------------------*/
-*, :before, :after {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+.solution-modal .modal-header {
+  background-color: #428bca;
 }
-
-input, select, button, textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  font: inherit;
-  color: inherit;
+.solution-modal .modal-footer {
+  background-color: #eee;
 }
 
 /*-----------------------------------*\

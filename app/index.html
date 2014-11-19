@@ -24,23 +24,16 @@
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-
-    <!-- build:js scripts/vendor.js -->
-  	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-  	<script src="bower_components/okvideo/src/okvideo.min.js"></script>
-  	<!-- endbuild -->
-
   	<div class="container">
   		<div class="jumbotron title">
-
-  			<h1>INSPECTRICE AMARA</h1>
-        <ul class="list-unstyled enigms">
+      <h1 class="animated fadeInDown">INSPECTRICE AMARA</h1>
+        <ul class="list-unstyled enigms animated flipInX">
           <li>
           <a id="enigm1" type="button" class="btn btn-default btn-lg" href="broken.html">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Enigm #1
           </a>
           </li>
-          <li>
+          <li >
           <a id="enigm2" type="button" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Enigm #2
           </a>
@@ -51,9 +44,19 @@
           </a>
           </li>
         </ul>
-  			
   		</div>
   	</div>
+
+    <!-- build:js scripts/vendor.js -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/okvideo/src/okvideo.min.js"></script>
+    <!-- endbuild -->
+
+    <!--build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+    
+
 
   	<script type="text/javascript">
     $(function(){
@@ -63,7 +66,7 @@
         var id= $elem.attr('id');
         var success= localStorage.getItem(id) === 'true';
         if (success) {
-          $elem.removeClass('btn-default').addClass('btn-success');
+          $elem.removeClass('btn-default').addClass('btn-success').attr('disabled', 'disabled');
           $elem.find('span').removeClass('glyphicon-remove').addClass('glyphicon-ok');
         } else {
           finished= false;
@@ -73,21 +76,12 @@
         alert("FINISHED");
       }
 
-      $.okvideo({ video: '7iJjnKK9MpM',
-                  volume: 100,
-                  loop: true,
-                  hd:true,
-                  adproof: true,
-                  annotations: false,
-                  onFinished: function() { console.log('finished') },
-                  unstarted: function() { console.log('unstarted') },
-                  onReady: function() { console.log('onready') },
-                  onPlay: function() { console.log('onplay') },
-                  onPause: function() { console.log('pause') },
-                  buffering: function() { console.log('buffering') },
-                  cued: function() { console.log('cued') },
-               });
+      // Commented for dev. Don't want gonna made
+      // bckgVideo('7iJjnKK9MpM');
     });
+  
+
+    
   </script>
 </body>
 </html>
