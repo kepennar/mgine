@@ -17,7 +17,7 @@
 </nav>
 
 <!-- Modal -->
-<div class="modal fadel solution-modal" id="solutionModal" tabindex="-1" role="dialog" aria-labelledby="solutionModalLabel" aria-hidden="true">
+<div class="modal fade solution-modal" id="solutionModal" tabindex="-1" role="dialog" aria-labelledby="solutionModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -25,77 +25,77 @@
 				<h4 class="modal-title" id="solutionModalLabel">Solution</h4>
 			</div>
 			<form id="solution-form" action="checkResult">
-			<div class="modal-body">
-				<div class="form-group">
-					<input type="text" id="solution" placeholder="Solution" class="form-control">
-				</div>
-			</div>
-			<div class="modal-footer">
-				<input  type="submit" value="Got it" id="submit-result" class="btn btn-success"/>
-			</div>
-			</form>
-		</div>
-	</div>
+                             <div class="modal-body">
+                                    <div class="form-group">
+                                           <input type="text" id="solution" placeholder="Solution" required class="form-control">
+                                   </div>
+                           </div>
+                           <div class="modal-footer">
+                            <input  type="submit" value="Got it" id="submit-result" class="btn btn-success"/>
+                    </div>
+            </form>
+    </div>
 </div>
-	<div id="game" class="container">
+</div>
+<div id="game" class="container">
+   <div class="panel lose animated fadeInRightBig" style="width:345px" id="panel0" data-backgroundimage="images/bb.png" data-foregroundimage="http://placehold.it/345x229&text=1"></div>
+   <div class="panel lose animated fadeInLeftBig"  style="width:320px"id="panel1" data-backgroundimage="images/eyes.png" data-foregroundimage="http://placehold.it/320&text=2"></div>
+</div>
 
-	    <div class="panel lose" id="panel0" data-backgroundimage="images/bb.png" data-foregroundimage="http://placehold.it/345x229&text=1"></div>
-	    <div class="panel lose" id="panel1" data-backgroundimage="images/eyes.png" data-foregroundimage="http://placehold.it/320&text=2"></div>
-	</div>
+<!-- build:js scripts/broken-vendor.js -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/cryptojslib/components/core-min.js"></script>
+<!-- endbuild -->
 
-		<!-- build:js scripts/broken-vendor.js -->
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="bower_components/cryptojslib/components/core-min.js"></script>
-        <!-- endbuild -->
+<!-- build:js scripts/broken-plugins.js -->
+<script src="scripts/trof.js"></script>
+<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+<script src="bower_components/cryptojslib/components/sha1-min.js"></script>
+<!-- endbuild -->
 
-        <!-- build:js scripts/broken-plugins.js -->
-        <script src="scripts/trof.js"></script>
-        <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
-        <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
-        <script src="bower_components/cryptojslib/components/sha1-min.js"></script>
-        <!-- endbuild -->
+<script type="text/javascript">
+       $(function() {
 
-        <script type="text/javascript">
-        	$(function() {
+              var $solution= $('#solution');
+              $('#solutionModal').on('shown.bs.modal', function() {
+                     $solution.focus();
+             });
 
-        		var $solution= $('#solution');
-        		$('#solutionModal').on('shown.bs.modal', function() {
-        			$solution.focus();
-        		});
+              $('#solution-form').submit(function(e) {
+                     e.preventDefault();
 
-        		$('#solution-form').submit(function(e) {
-        			e.preventDefault();
+                     var solution= $solution.val();
+                     var hash = CryptoJS.SHA1(solution).toString();
+                     if (hash === 'f91a8ee646a277a2f1359709604b99c1b32d9f24'){
+                            localStorage.setItem('enigm2', true);
+                            window.location.href = 'index.html';
+                    } else {
+                     wrongAnswerStyle();
 
-        			var solution= $solution.val();
-        			var hash = CryptoJS.SHA1(solution).toString();
-        			if (hash === 'f91a8ee646a277a2f1359709604b99c1b32d9f24'){
-        				localStorage.setItem('enigm2', true);
-        			window.location.href = 'index.html';
-        		} else {
-        			wrongAnswerStyle();
+             }
+             return false;
+     });
 
-        		}
-        		return false;
-        	});
-
-        		var wrongAnswerStyle= function() {
-        			var anims= ['hinge', 'tada', 'bounce'];
-        			var rand= Math.floor((Math.random() * 5));
-        			if (rand === 3) {
-        				window.location.href = 'fail.html?back=trof.html';	
-        			} else {
-        				var animIndice= Math.floor((Math.random() * anims.length));
-        				var anim= anims[animIndice];
-        				$solution.parent().addClass('has-error');
-        				$solution.addClass('animated ' + anim);
-        				setTimeout(function() {
-        					$solution.removeClass('animated ' + anim);
-        					$solution.parent().removeClass('has-error');
-        				}, 2000);
-        			}
-        		};
-        	});
-		</script>
+              var wrongAnswerStyle= function() {
+                     var anims= ['hinge', 'tada', 'bounce'];
+                     var rand= Math.floor((Math.random() * 5));
+                     if (rand === 3) {
+                            window.location.href = 'fail.html?back=trof.html';	
+                    } else {
+                            var animIndice= Math.floor((Math.random() * anims.length));
+                            var anim= anims[animIndice];
+                            $solution.parent().addClass('has-error');
+                            $solution.addClass('animated ' + anim);
+                            setTimeout(function() {
+                                   $solution.removeClass('animated ' + anim);
+                                   $solution.parent().removeClass('has-error');
+                           }, 2000);
+                    }
+            };
+    });
+</script>
 
 </body>
 </html>

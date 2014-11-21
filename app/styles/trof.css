@@ -9560,3 +9560,7 @@ Copyright (c) 2014 Daniel Eden
 body {
   margin-top: 100px;
 }
+
+.lose {
+  margin: auto;
+}

@@ -6,6 +6,7 @@
     "modernizr": "~2.6.2",
     "jquery": "~1.11.0",
     "okvideo": "2.3.3",
-    "cryptojslib": "~3.1.2"
+    "cryptojslib": "~3.1.2",
+    "mapbox.js": "~2.1.3"
   }
 }

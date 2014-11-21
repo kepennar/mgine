@@ -17,7 +17,7 @@
 </nav>
 
 <!-- Modal -->
-<div class="modal fadel solution-modal" id="solutionModal" tabindex="-1" role="dialog" aria-labelledby="solutionModalLabel" aria-hidden="true">
+<div class="modal fade solution-modal" id="solutionModal" tabindex="-1" role="dialog" aria-labelledby="solutionModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -27,7 +27,7 @@
 			<form id="solution-form" action="checkResult">
 			<div class="modal-body">
 				<div class="form-group">
-					<input type="text" id="solution" placeholder="Solution" class="form-control">
+					<input type="text" id="solution" placeholder="Solution" required class="form-control">
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -174,6 +174,7 @@
 
         <!-- build:js scripts/broken-plugins.js -->
         <script src="scripts/libs/jgravity.min.js"></script>
+        <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
         <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
         <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
         <script src="bower_components/cryptojslib/components/sha1-min.js"></script>

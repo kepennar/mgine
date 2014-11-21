@@ -121,29 +121,13 @@ var scratchCardId = 0;
         foreGroundImage: null,
         backgGroundImage: null,
         revealRadius: 30
-
-
     };
 })(jQuery, window, document);
 
 
 
-
-
-
-/*
- * Track which panels have been scratched
- * Show winning or losing notification
- *
- *
- */
-var played = false;
-
 $(document).ready(function () {
-
-    $("#game").fadeIn();
-
     $(".panel").rabidScratchCard({
-        revealRadius: 5
+        revealRadius: 2
     });
 });
