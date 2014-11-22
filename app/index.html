@@ -21,6 +21,30 @@
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+
+
+  <!-- Modal -->
+  <div class="modal fade last-solution-modal" id="solutionModal" 
+  tabindex="-1" role="dialog" aria-labelledby="solutionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="solutionModalLabel">Solution finale</h4>
+        </div>
+        <form id="solution-form" action="checkResult">
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" id="solution" placeholder="Solution" required class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input  type="submit" value="Got it" id="submit-result" class="btn btn-success" />
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   	<div class="container">
   		<div class="jumbotron title">
       <h1 class="animated fadeInDown">INSPECTRICE AMARA</h1>
@@ -47,10 +71,16 @@
     <!-- build:js scripts/vendor.js -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/okvideo/src/okvideo.min.js"></script>
+    <script src="bower_components/cryptojslib/components/core-min.js"></script>
     <!-- endbuild -->
 
     <!--build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="bower_components/cryptojslib/components/sha1-min.js"></script>
+    <script src="bower_components/cryptojslib/components/sha1-min.js"></script>
     <!-- endbuild -->
     
 
@@ -69,12 +99,55 @@
           finished= false;
         }
       });
+
+      var $solutionModal= $('#solutionModal');
       if (finished) {
-        alert("FINISHED");
+        $solutionModal.modal('show'); 
       }
 
       // Commented for dev. Don't want gonna made
       // bckgVideo('7iJjnKK9MpM');
+
+
+
+
+      var $solution= $('#solution');
+      $solutionModal.on('shown.bs.modal', function() {
+        $solution.focus();
+      });
+
+      $('#solution-form').submit(function(e) {
+        e.preventDefault();
+
+        var solution= $solution.val();
+        var hash = CryptoJS.SHA1(solution).toString();
+        if (hash === '02028f859df7edfd7f48fb78829d2fe3e34997af'
+            || hash === 'f0c437c98edbd11602408b3513e13088b7d16123'
+            || hash === '2ff04794e3458f1a9471c8896ef0a9e20ed203f6'){
+          localStorage.setItem('enigm3', true);
+          window.location.href = 'success.html';
+        } else {
+          wrongAnswerStyle();
+        }
+        return false;
+      });
+
+      var wrongAnswerStyle= function() {
+        var anims= ['hinge', 'tada', 'bounce'];
+        var rand= Math.floor((Math.random() * 5));
+        if (rand === 3) {
+          window.location.href = 'fail.html?back=index.html';  
+        } else {
+          var animIndice= Math.floor((Math.random() * anims.length));
+          var anim= anims[animIndice];
+          $solution.parent().addClass('has-error');
+          $solution.addClass('animated ' + anim);
+          setTimeout(function() {
+            $solution.removeClass('animated ' + anim);
+            $solution.parent().removeClass('has-error');
+          }, 2000);
+        }
+      };
     });
   
 

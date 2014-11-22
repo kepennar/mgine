@@ -1,1 +1,35 @@
 @import "default";
+@import "compass/css3/text-shadow";
+
+
+html, body, #map {
+	height:100%;
+	width:100%;
+	padding:0px;
+	margin:0px;
+} 
+.page-title {
+	top: 70px;
+	z-index: 1000;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	color: #777;
+	background-color: #FAFAFA;
+	@include text-shadow;
+	h1 {
+		font-size: 5em;	
+	}
+	h2 {
+		font-size: 3em;	
+	}	
+}
+#map {
+	position:absolute; 
+	top:0; 
+	bottom:0; 
+}
+.leaflet-container .marker-description img {
+	border-radius: 8px;
+	box-shadow: 5px 5px 5px 1px #656565;
+}

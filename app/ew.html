@@ -14,21 +14,40 @@
 	<!-- build:css styles/ew.css -->
 	<link rel="stylesheet" href="styles/ew.css">
 	<link rel="stylesheet" href="bower_components/mapbox.js/mapbox.css">
-	<link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/leaflet.fullscreen.css' rel='stylesheet' />
+	<!-- <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/leaflet.fullscreen.css' rel='stylesheet' /> -->
 	<!-- endbuild -->
 
 	<script src="bower_components/mapbox.js/mapbox.js"></script>
-	<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/Leaflet.fullscreen.min.js'></script>
+	<!-- <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/Leaflet.fullscreen.min.js'></script> -->
 
 </head>
 <body>
+	<div id="title" class="page-title hidden"> 
+		<h1>You WIN !!!</h1>
+		<h2>Un weekend à Paris</h2>
+		<h3>Du 5 au 7 décembre 2014. Pour deux personnes, tout compris!</h3>
+	</div>
 	<div id="map"></div>
-	<script>
-	L.mapbox.accessToken = 'pk.eyJ1Ijoia2VwZW5uYXIiLCJhIjoiVl9UakZqayJ9.DdlQRSLK7rpwQwyQszLyOg';
-	var map = L.mapbox.map('map', 'kepennar.k9gbf9le')
-	    .setView([38.8896, -77.0417], 15);
 
-	L.control.fullscreen().addTo(map);
-</script>
+	<!-- build:js scripts/broken-vendor.js -->
+	<script src="bower_components/mapbox.js/mapbox.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- endbuild -->
+	<script>
+		L.mapbox.accessToken = 'pk.eyJ1Ijoia2VwZW5uYXIiLCJhIjoiVl9UakZqayJ9.DdlQRSLK7rpwQwyQszLyOg';
+		var map = L.mapbox.map('map', 'kepennar.k9gbf9le', {
+			zoomControl: false
+		}).setView([48.860440, 2.329035], 14);
+		var $title= $('#title');
+		$(function() {
+			setTimeout(function() {
+				$title.removeClass('hidden').addClass('animated bounceIn');	
+			}, 1500);
+			
+		});
+		$("#map").click(function() {
+			$title.removeClass('bounceIn').addClass('bounceOutDown');
+		});
+	</script>
 </body>
 </html>

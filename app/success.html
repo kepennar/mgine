@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sucess</title>
+	<!-- build:css styles/success.css -->
+	<link rel="stylesheet" href="styles/success.css">
+	<!-- endbuild -->
+</head>
+<body>
+
+<div id="message" class="message hidden">
+	<h1>Tu as trouvé !!! </h1>
+	<h3>La réponse est effectivement</h3>
+	<h2>La Crète</h2>
+</div>
+<div id="sub-message" class="message hidden">
+	<h1>Mais on s'en fout!</h1>
+	<h2>Attends quelques secondes...</h2>
+</div>
+
+<canvas id="canvas">Canvas is not supported in your browser.</canvas>
+
+<!-- build:js scripts/broken-vendor.js -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/success-plugins.js -->
+<script src="scripts/firework.js"></script>
+<!-- endbuild -->
+
+<script type="text/javascript">
+	var $message= $('#message');
+	setTimeout(function() {
+		$message.removeClass('hidden').addClass('animated fadeInUpBig');	
+	}, 1500);
+
+	setTimeout(function() {
+		$message.removeClass('fadeInUpBig').addClass('bounceOutDown');
+		$('#sub-message').removeClass('hidden').addClass('animated fadeInUpBig');
+		//$.post('http://rocky-chamber-7651.herokuapp.com/call/+33630997545');
+
+	}, 4500);
+	
+</script>
+</body>
+</html>

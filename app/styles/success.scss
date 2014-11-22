@@ -1,0 +1,33 @@
+
+@import "default";
+@import "compass/css3/text-shadow";
+
+/* basic styles for black background and crosshair cursor */
+body {
+	height: 100%;
+	background: #000;
+	margin: 0;
+	overflow: hidden;
+}
+
+canvas {
+	display: block;
+}
+
+.message {
+	top: 70px;
+	z-index: 1000;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	color: #FAFAFA;
+	background-color: transparent;
+	opacity: 0.8;
+	@include text-shadow;
+	h1 {
+		font-size: 5em;	
+	}
+	h2 {
+		font-size: 3em;	
+	}	
+}
