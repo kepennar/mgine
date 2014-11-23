@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hanged</title>
+	<!-- build:css styles/hanged.css -->
+	<link rel="stylesheet" href="styles/hanged.css">
+	<!-- endbuild -->
+</head>
+<body>
+	
+<div id="game" class="container">
+  <div class="fail-message hidden">
+    You fail !!!
+  </div>
+  <div class="row hang"> 
+    <div id="rope" class="element invisible" data-elem-fail="4"></div>
+    <div id="handle" class="element invisible" data-elem-fail="3"></div>
+    <div id="pole" class="element invisible" data-elem-fail="2"></div>
+    <div id="bot" class="element invisible" data-elem-fail="1"></div>
+    
+    <div id="head" class="element invisible" data-elem-fail="5"></div>
+    <div id="body" class="element invisible" data-elem-fail="6"></div>
+    <div id="arm" class="element invisible" data-elem-fail="7"></div>
+  </div>
+  <div class="row inputs">
+    <input class="character hidden fadeInRightBig" type="text" maxlength="1" data-letter-rank="1"/>
+    <input class="character hidden fadeInRightBig" type="text" maxlength="1" data-letter-rank="2"/>
+    <input class="character hidden fadeInUpBig" type="text" maxlength="1" data-letter-rank="3"/>
+    <input class="character hidden fadeInUpBig" type="text" maxlength="1" data-letter-rank="4"/>
+    <input class="character hidden fadeInDownBig" type="text" maxlength="1" data-letter-rank="5"/>
+    <input class="character hidden fadeInLeftBig" type="text" maxlength="1" data-letter-rank="6"/>
+    <input class="character hidden fadeInLeftBig" type="text" maxlength="1" data-letter-rank="7"/>
+  </div>
+</div>
+
+<!-- build:js scripts/hanged-vendor.js -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/cryptojslib/components/core-min.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/hanged-plugins.js -->
+<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+<script src="bower_components/cryptojslib/components/sha1-min.js"></script>
+<!-- endbuild -->
+
+<script type="text/javascript">
+ $(function() {
+
+  var letters= [
+      '8efd86fb78a56a5145ed7739dcb00c78581c5375'
+    , '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8'
+    , '51e69892ab49df85c6230ccc57f8e1d1606caccc'
+    , '4dc7c9ec434ed06502767136789763ec11d2c4b7'
+    , '58e6b3a414a1e090dfc6029add0f3555ccba127f'
+    , '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8'
+    , '51e69892ab49df85c6230ccc57f8e1d1606caccc'
+    ];
+
+    setTimeout(function() {
+      $('.character').removeClass('hidden').addClass('animated');
+    }, 1000);
+
+    var game= (function() {
+      var nbFail= 0;
+
+      var init= function() {
+        nbFail= 0;
+        $('.element').removeClass('fadeIn').addClass('invisible');
+        $('input.character').val('');
+      };
+
+      $('input.character').bind('keyup', function() {
+        var letterRank= $(this).data('letter-rank') - 1;
+        var letter= $(this).val();
+
+        console.debug(letterRank, letter);
+        if (CryptoJS.SHA1(letter).toString() !== letters[letterRank]) {
+          nbFail++;
+          $(this).val(''); 
+          if (nbFail > 7) {
+            $('.fail-message').removeClass('hidden').addClass('animated fadeInUpBig');
+            init();
+            setTimeout(function() {
+              $('.fail-message').removeClass('fadeInUpBig').addClass('hidden');
+            }, 2000);
+          } else {
+            $('.element[data-elem-fail=' + nbFail + ']').removeClass('invisible').addClass('animated fadeIn');
+          }          
+        } else {
+          $(this).next().focus();
+          var ok= true;
+          $('input.character').each(function(i, e) {
+            var letterRank= $(e).data('letter-rank') - 1;
+            var letter= $(e).val();
+            if (CryptoJS.SHA1(letter).toString() !== letters[letterRank]) {
+              ok= false;
+            }
+          });
+          if (ok) {
+            localStorage.setItem('enigm1', true);
+            window.location.href = 'index.html';
+          }
+        }
+      });
+    })();
+});
+</script>
+
+</body>
+</html>
